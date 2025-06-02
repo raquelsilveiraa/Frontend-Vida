@@ -1,0 +1,153 @@
+<ion-split-pane contentId="main-content">
+ 
+  <ion-menu contentId="meio-menu" type="reveal">
+    <ion-content class="fundo-menu">
+      <div class="icone-menu">
+        <img src="assets/menu.png" alt="Menu" class="menu" />
+      </div>
+
+      <ion-list>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/home" lines="none" detail="false" class="funcionalidades">
+            
+            <img src="assets/home.png" alt="Home" class="icones" />
+            <ion-label>HOME</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/instituicoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/pharmacy.png" alt="Instituição" class="icones" />
+            <ion-label>INSTITUIÇÕES</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+       
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/agendamento" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/event.png" alt="Agendamento" class="icones" />
+            <ion-label>AGENDAMENTO</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/notificacoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/bell.png" alt="Notificações" class="icones" />
+            <ion-label>EMITIR ALERTA</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+
+ 
+    <ion-header>
+      <ion-toolbar>
+
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-title>INSTITUIÇÕES DE DOAÇÃO DE SANGUE</ion-title>
+        
+        
+
+        <ion-buttons slot="end" class="sair">
+          
+          <ion-button fill="clear" size="small" (click)="logout()">
+            Sair
+          </ion-button>
+        </ion-buttons>
+
+      </ion-toolbar>
+    </ion-header>
+
+  
+    <ion-content>
+
+      <ion-card class="tabela">
+
+      
+        <ion-card-header>
+          <ion-card-title>
+            {{ unidades.length }} Unidades de saúde cadastradas
+          </ion-card-title>
+        </ion-card-header>
+
+       
+        <div class="crud">
+
+          <ion-buttons>
+
+            
+            <ion-button (click)="onAdicionar()" slot="end" color="primary">
+              <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+            </ion-button>
+
+            <ion-select
+              interface="popover"
+              placeholder="ID"
+              [(ngModel)]="filtrar"
+              size="small">
+              <ion-select-option value="id">ID</ion-select-option>
+              <ion-select-option value="nome">Nome</ion-select-option>
+              <ion-select-option value="cidade">Cidade</ion-select-option>
+            </ion-select>
+
+          </ion-buttons>
+
+          <ion-searchbar
+            [(ngModel)]="buscar"
+            placeholder="Pesquisar"
+            debounce="400"
+            showCancelButton="focus">
+          </ion-searchbar>
+
+        </div>
+
+        
+        <div class="rolar-tabela">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>CNES</th>
+                <th>Nome</th>
+                <th>Instituição</th>
+                <th>Categoria</th>
+                <th>Cidade</th>
+                <th>Bairro</th>
+                <th>Telefone</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let u of unidadesFiltradas">
+                <td>{{ u.id }}</td>
+                <td>{{ u.cnes }}</td>
+                <td>{{ u.nome }}</td>
+                <td>{{ u.instituicao }}</td>
+                <td>{{ u.categoria }}</td>
+                <td>{{ u.municipio }}</td>
+                <td>{{ u.bairro }}</td>
+                <td>{{ u.telefone }}</td>
+              </tr>
+            </tbody>
+
+              
+
+            
+          </table>
+        </div>
+
+      </ion-card>
+
+    </ion-content>
+  </div>
+</ion-split-pane>

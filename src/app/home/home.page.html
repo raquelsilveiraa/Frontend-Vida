@@ -1,20 +1,118 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-split-pane contentId="main-content">
+  
+  <ion-menu contentId="meio-menu" type="overlay">
+    <ion-content class="fundo-menu">
+      <div class="icone-menu">
+        <img src="assets/menu.png" alt="Menu" class="menu" />
+      </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <ion-list>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/home" lines="none" detail="false" class="funcionalidades">
+            
+            <img src="assets/home.png" alt="Home" class="icones" />
+            <ion-label>HOME</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+       
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/instituicoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/pharmacy.png" alt="Instituição" class="icones" />
+            <ion-label> INSTITUIÇÃO</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/agendamento" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/event.png" alt="Agendamento" class="icones" />
+            <ion-label>AGENDAMENTO</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/notificacoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/bell.png" alt="Notificações" class="icones" />
+            <ion-label>EMITIR ALERTA</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar color="light">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>HOME</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="logout()" fill="clear">
+            <img src="assets/log-out.png" alt="Sair" class="toolbar-icon" />
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+     
+      <!-- Exibe lista de Alertas Recentes -->
+      <ion-list *ngIf="alertas.length > 0">
+        <ion-list-header>
+          <ion-label>Alertas Recentes</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let n of alertas">
+          <ion-label>
+            <h2>{{ n.tipoSanguineo }} {{ n.rh }} – {{ n.hemocentro }}</h2>
+            <p>{{ n.timestamp | date:'short' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+       <ion-content>
+
+      <!-- ===== CARD "Quem pode doar?" ===== -->
+      <ion-card class="quem-pode-doar-card">
+        <!-- Título Azul -->
+        <ion-card-header>
+          <ion-card-title>
+            REQUISITOS PARA SER UM DOADOR
+          </ion-card-title>
+        </ion-card-header>
+
+        <!-- Conteúdo com fundo claro -->
+        <ion-card-content>
+          <h2>Quem pode doar?</h2>
+          <ul>
+            <li>Estar em boas condições de saúde.</li>
+            <li>Ter entre 18 e 69 anos, desde que a primeira doação tenha sido feita até 60 anos.</li>
+            <li>Pesar no mínimo 50kg.</li>
+            <li>Estar descansado (ter dormido pelo menos 6 horas nas últimas 24 horas).</li>
+            <li>Estar alimentado (evitar alimentação gordurosa nas 4 horas que antecedem a doação).</li>
+            <li>
+              Apresentar documento original com foto recente, que permita a identificação do candidato, emitido por órgão oficial:
+              <ul class="sub-list">
+                <li>RG – Carteira de Identidade física ou cópia autenticada; RG – Carteira de Identidade digital;</li>
+                <li>CNH – Carteira Nacional de Habilitação física, com foto e filiação; CNH – Carteira Nacional de Habilitação digital, com a presença do QR Code.</li>
+              </ul>
+            </li>
+          </ul>
+        </ion-card-content>
+      </ion-card>
+     
+    </ion-content>
+
+
+      
+
+    <ion-content>
+    
+    </ion-content>
   </div>
-</ion-content>
+</ion-split-pane>

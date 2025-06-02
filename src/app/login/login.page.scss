@@ -1,0 +1,72 @@
+
+:host {
+  ion-content {
+    --background: transparent;
+    
+  }
+
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .esquerda {
+    flex: 1;
+    background: #eaf4ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      margin-bottom: -0.1rem;
+    }
+
+    p {
+      color: #7a9cb9;
+      font-size: 1.5rem;
+    }
+  }
+
+  .direita {
+    flex: 1;
+    background: #006aff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .bloco-login {
+      width: 80%;
+      max-width: 380px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      color: #fff;
+
+      h1 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+      }
+
+      ion-item {
+        margin-bottom: 0.75rem;
+        
+      }
+
+      a.esqueceu {
+        display: block;
+        text-align: center;
+        font-size: 0.85rem;
+        text-decoration: underline;
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+
+      ion-button {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="container">
+    
+    <div class="esquerda">
+    
+      <img src="assets/gota.png" alt="Gota" class="gota-img" />
+
+      <p>Faça o login para acessar a área do administrador</p>
+    </div>
+
+ 
+    <div class="direita">
+      <div class="bloco-login">
+        <h1>Bem-vindo(a)!</h1>
+        <form [formGroup]="formulario" (ngSubmit)="login()">
+          <ion-item lines="none">
+            <ion-label position="stacked" color="light">Login</ion-label>
+            <ion-input
+              formControlName="login"
+              type="text"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="stacked" color="light">Senha</ion-label>
+            <ion-input
+              formControlName="senha"
+              type="password"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <a class="esqueceu" (click)="esqueceuSenha()">Esqueceu a senha?</a>
+
+          <ion-button expand="block" type="submit">ENTRAR</ion-button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

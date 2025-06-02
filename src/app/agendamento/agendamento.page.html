@@ -1,0 +1,196 @@
+<ion-split-pane contentId="main-content">
+
+  <ion-menu contentId="meio-menu" type="reveal">
+    <ion-content class="fundo-menu">
+      <div class="icone-menu">
+        <img src="assets/menu.png" alt="Menu" class="menu" />
+      </div>
+      <ion-list>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/home" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/home.png" alt="Home" class="icones" />
+            <ion-label>HOME</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/instituicoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/pharmacy.png" alt="Instituicoes" class="icones" />
+            <ion-label> INSTITUIÇÕES</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/agendamento" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/event.png" alt="Agendamento" class="icones" />
+            <ion-label>AGENDAMENTO</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/notificacoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/bell.png" alt="Notificações" class="icones" />
+            <ion-label>EMITIR ALERTA</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>AGENDAMENTO</ion-title>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" size="small" (click)="logout()">SAIR</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-card class="tamanho-card">
+      
+        <div class="titulo-card">VISUALIZAR AGENDAMENTOS</div>
+
+       
+        <ng-container *ngIf="step === 'form'">
+          <form [formGroup]="formFiltro" (ngSubmit)="onVisualizar()" class="form">
+            <ion-item>
+              <ion-label position="stacked">Escolher Instituição</ion-label>
+              <ion-select interface="popover"
+                          formControlName="instituicao"
+                          placeholder="SELECIONE">
+                <ion-select-option *ngFor="let inst of instituicoes" [value]="inst">
+                  {{ inst }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Data</ion-label>
+              <ion-datetime presentation="date"
+                            formControlName="data"
+                            placeholder="SELECIONE">
+              </ion-datetime>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Horário</ion-label>
+              <ion-select interface="popover"
+                          formControlName="horario"
+                          [disabled]="horarios.length === 0"
+                          placeholder="SELECIONE">
+                <ion-select-option *ngFor="let h of horarios" [value]="h">{{ h }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Visualizar Histórico</ion-label>
+              <ion-select interface="popover"
+                          formControlName="historico"
+                          placeholder="SELECIONE">
+                <ion-select-option value="nao">Não</ion-select-option>
+                <ion-select-option value="sim">Sim</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-button expand="block" type="submit" [disabled]="formFiltro.invalid">
+              VISUALIZAR
+            </ion-button>
+          </form>
+        </ng-container>
+
+       
+        <ng-container *ngIf="step === 'detalhe'">
+          <div class="formulario-detalhe">
+            <ion-item>
+              <ion-label position="stacked">Nome Completo (Desabilitado)</ion-label>
+              <ion-input disabled value="Paulo Silva Sousa"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">CPF (Desabilitado)</ion-label>
+              <ion-input disabled value="123.657.890-20"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Email (Desabilitado)</ion-label>
+              <ion-input disabled value="paulo.silva@gmail.com"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">RG (Desabilitado)</ion-label>
+              <ion-input disabled value="3.876.089"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Instituição (Desabilitado)</ion-label>
+              <ion-input disabled [value]="formFiltro.value.instituicao"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Tipo Sanguíneo (Desabilitado)</ion-label>
+              <ion-input disabled value="A+"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Endereço *</ion-label>
+              <ion-input placeholder="Rua das Castanholas"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Número *</ion-label>
+              <ion-input placeholder="75"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">CEP *</ion-label>
+              <ion-input placeholder="28490506"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Data</ion-label>
+              <ion-input disabled [value]="formFiltro.value.data | date:'dd/MM/yyyy'"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Horário</ion-label>
+              <ion-input disabled [value]="formFiltro.value.horario"></ion-input>
+            </ion-item>
+          </div>
+
+          <ion-button expand="block" (click)="voltar()">VOLTAR</ion-button>
+        </ng-container>
+
+        
+        <ng-container *ngIf="step === 'historico'">
+          <div class="titulo-card">HISTÓRICO DE DOAÇÕES</div>
+
+          <div class="tamanho-card">
+            <table>
+              <tbody>
+                <tr *ngFor="let h of historico">
+                  <td class="zoom">
+                    <ion-icon name="search-outline"></ion-icon>
+                  </td>
+                  <td>{{ h.data | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ h.local }}</td>
+                  <td>{{ h.tipo }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ion-button expand="block" (click)="voltar()">VOLTAR</ion-button>
+        </ng-container>
+
+      </ion-card>
+    </ion-content>
+  </div>
+</ion-split-pane>

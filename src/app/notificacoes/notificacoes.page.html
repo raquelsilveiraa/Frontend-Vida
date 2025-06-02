@@ -1,0 +1,129 @@
+<ion-split-pane contentId="main-content">
+  
+  <ion-menu contentId="meio-menu" type="reveal">
+    <ion-content class="fundo-menu">
+      <div class="icone-menu">
+         <img src="assets/menu.png" alt="Menu" class="menu" />
+      </div>
+
+      <ion-list>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/home" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/home.png" alt="Home" class="icones" />
+            <ion-label>HOME</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/instituicoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/pharmacy.png" alt="Instituições" class="icones" />
+            <ion-label>INSTITUIÇÕES</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/agendamento" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/event.png" alt="Agendamento" class="icones" />
+            <ion-label>AGENDAMENTO</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/notificacoes" lines="none" detail="false" class="funcionalidades">
+            <img src="assets/bell.png" alt="Notificações" class="icones" />
+            <ion-label>EMITIR ALERTA </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  
+  <div class="ion-page" id="main-content">
+ 
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>EMITIR ALERTA</ion-title>
+        <ion-buttons slot="end">
+          <ion-button fill="clear" size="small" (click)="logout()">SAIR</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-card class="central-cartao">
+      
+        <div class="titulo-cartao">EMITIR ALERTA</div>
+
+        
+        <form [formGroup]="Alerta" (ngSubmit)="emitirAlerta()" class="formulario-alerta">
+          
+         
+          <ion-item>
+            <ion-label position="stacked">Hemocentro</ion-label>
+            <ion-select interface="popover"
+                        formControlName="hemocentro"
+                        placeholder="SELECIONE">
+              <ion-select-option *ngFor="let h of hemocentros" [value]="h">
+                {{ h }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+         
+         
+         
+          <ion-item>
+            <ion-label position="stacked">Tipo Sanguíneo em Carência</ion-label>
+            <ion-select interface="popover"
+                        formControlName="tipoSanguineo"
+                        placeholder="SELECIONE">
+              <ion-select-option *ngFor="let tipo of tiposSanguineos" [value]="tipo">
+                {{ tipo }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          
+          
+
+          
+          <div class="aparencia-rh">
+            <div class="titulo-rh">Fator RH:</div>
+            <ion-item lines="none">
+              <ion-checkbox slot="start" formControlName="rhPos"></ion-checkbox>
+              <ion-label>+</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-checkbox slot="start" formControlName="rhNeg"></ion-checkbox>
+              <ion-label>-</ion-label>
+            </ion-item>
+          </div>
+
+          
+          <ion-button expand="block" type="submit" [disabled]="Alerta.invalid">
+            CONFIRMAR
+          </ion-button>
+        </form>
+      </ion-card>
+     <ion-list *ngIf="notificacoes.length > 0">
+        <ion-list-header>
+          <ion-label>Alertas Recentes</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let n of notificacoes">
+          <ion-label>
+            <h2>{{ n.tipoSanguineo }} {{ n.rh }}</h2>
+            <p>{{ n.timestamp | date:'short' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </div>
+</ion-split-pane>
