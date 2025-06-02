@@ -53,45 +53,16 @@ ionic serve
 
     Senha padrão: 12345
 
-    Importante:
 
-        Esses dados servem apenas para propósitos de desenvolvimento.
-
-        Em ambiente de produção, troque imediatamente as credenciais ou configure um sistema de autenticação seguro.
-
-Caso seja necessário alterar esse usuário/senha, localize o arquivo de configuração de autenticação (normalmente em src/app/services/auth.service.ts ou similar) e modifique conforme o back-end em uso.
-📁 Estrutura de Pastas (exemplo simplificado)
-
-vida-app/
-├── src/
-│   ├── app/
-│   │   ├── pages/             # Pages (telas) da aplicação
-│   │   ├── services/          # Serviços (API, autenticação, etc.)
-│   │   ├── components/        # Componentes compartilhados
-│   │   ├── app.module.ts
-│   │   └── app-routing.module.ts
-│   ├── assets/                # Imagens, ícones, estilos estáticos
-│   ├── environments/          # Configurações de ambiente (dev/prod)
-│   ├── theme/                 # Variáveis de tema e estilos globais
-│   ├── index.html
-│   └── main.ts
-├── ionic.config.json  
-├── package.json  
-├── tsconfig.json  
-└── README.md                  # Arquivo que você está lendo
-
-Essa é uma visão geral; a estrutura real pode conter outras pastas (e.g., .angular/, www/, etc.), mas o foco para desenvolvimento está em src/.
 📦 Comandos Úteis
 
-    Compilar sem servidor
+    Compilar sem servidor:
 
-ionic build
+      ionic build
 
-Gera os arquivos de produção na pasta www/.
+  Rodar no emulador (Android/iOS):
 
-Rodar no emulador (Android/iOS)
-
-ionic capacitor run android
-ionic capacitor run ios
+    ionic capacitor run android
+    ionic capacitor run ios
 
 (Requer configuração prévia de Capacitor e SDKs de plataforma)
